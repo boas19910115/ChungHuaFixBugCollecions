@@ -1,0 +1,112 @@
+<!-- FIX MENU BUTTON -->
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<button class="closed" id='newMenuButton' onclick="onMenuButtonClick(this)">
+  <i class="material-icons">menu</i>
+  <span>選單</span>
+</button>
+
+<script>
+  window.addEventListener('load', function () {
+    var oldMenuButton = document.querySelector('button.rwd-navbar-toggle.rwd-collapse');
+    oldMenuButton.setAttribute('style', 'display:none;')
+    var headerContainer = document.querySelector('div.navbar.navbar-fixed-top');
+    var newMenuButton = document.getElementById('newMenuButton')
+    headerContainer.prepend(newMenuButton)
+  })
+  function onMenuButtonClick(el) {
+    var currentButton = el
+    var iconElement = document.querySelector('button#newMenuButton>i.material-icons');
+    var sideBar = document.getElementById('rwd-side');
+    var iconTypes = {
+      OPEN: 'menu_open',
+      CLOSE: 'menu'
+    }
+    var keyClass = 'menu-open';
+
+    var isOpen = sideBar.className.includes(keyClass)
+    if (isOpen) {
+      currentButton.setAttribute('class', `${currentButton.className.replace('expand', 'closed').trim()}`)
+      sideBar.setAttribute('class', `${sideBar.className.replace(keyClass, '').trim()}`)
+      iconElement.innerHTML = iconTypes.CLOSE
+    } else {
+      currentButton.setAttribute('class', `${currentButton.className.replace('closed', 'expand').trim()}`)
+      sideBar.setAttribute('class', `${sideBar.className} ${keyClass}`)
+      iconElement.innerHTML = iconTypes.OPEN
+    }
+  }
+</script>
+<style>
+  @media only screen and (max-width:768px) {
+    body {
+      font-family: "Montserrat", 'Open Sans', -apple-system, 'Helvetica Neue', Helvetica, Arial, 'Lantinghei TC', 'Microsoft JhengHei', sans-serif;
+    }
+
+    div.navbar.navbar-fixed-top {
+      justify-content: flex-start;
+      padding: 0;
+      height: fit-content;
+      min-height: unset;
+    }
+
+    div.navbar.navbar-fixed-top>div.container {
+      display: none;
+      padding: 0;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: transparent;
+    }
+
+    button#newMenuButton {
+      display: inline-flex;
+      margin-right: auto;
+      justify-content: center;
+      align-items: center;
+      outline: none;
+      transition: all 500ms;
+      border: none;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      width: fit-content;
+      z-index: 1;
+      font-weight: 500;
+      min-height: 40px;
+      padding: 0;
+      width: 5rem;
+    }
+
+    button#newMenuButton>* {
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    button#newMenuButton>i {
+      font-size: 28px;
+    }
+
+    button#newMenuButton:hover,
+    button#newMenuButton.expand {
+      transform: translate(-2px, 0px);
+    }
+
+    button#newMenuButton.closed {
+      transform: translate(-0px, -0px);
+    }
+  }
+
+  @media only screen and (min-width:769px) {
+    button#newMenuButton {
+      display: none;
+    }
+  }
+</style>
+<!-- FIX MENU BUTTON -->
